@@ -1,27 +1,27 @@
 package symele.s184953;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Player extends GameObject {
 
-    public Player(int x, int y, ID id) {
-        super(x, y, id);
-
+    public Player(int x, int y, ID id, int sizeX, int sizeY) {
+        super(x, y, id, sizeX, sizeY);
         //Wartości na testowanie
-        velX = 3;
-        velY = 0;
+
+
     }
 
     public void tick() {
-        x += velX;
-        y += velY;
 
-        x = Game.clamp(x, 0, Game.WIDTH-100);
-        y = Game.clamp(y, 0, Game.HEIGHT);
+
+        //Do ustawienia
+        x = Game.clamp(x, 0, Game.WIDTH-sizeX);
+        y = Game.clamp(y, 0, Game.HEIGHT-sizeY);
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.white);
-        g.fillRect(x, y, 32, 32);
+        g.setColor(Color.red);
+        g.fillRect(x, y, sizeX, sizeY);
     }
 }

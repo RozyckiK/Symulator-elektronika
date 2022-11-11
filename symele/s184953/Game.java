@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable{
 
     public static final int WIDTH = 900, HEIGHT = WIDTH / 12 * 9;
 
@@ -16,11 +16,12 @@ public class Game extends Canvas implements Runnable {
     public Game(){
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
+        this.addMouseMotionListener(new MouseInput((handler)));
 
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
 
 
-        handler.addObject(new Player(100, 100, ID.Player));
+        handler.addObject(new Player(100, 100, ID.Player , 32 ,32));
     }
 
     public synchronized void start(){
@@ -62,7 +63,7 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS: " + frames);
+                //System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }

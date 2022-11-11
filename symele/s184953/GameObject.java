@@ -4,14 +4,16 @@ import java.awt.*;
 
 public abstract class GameObject {
 
-    protected int x, y;
+    protected int x, y, sizeX, sizeY;
     protected ID id;
     protected int velX, velY;
 
-    public GameObject(int x, int y, ID id){
+    public GameObject(int x, int y, ID id, int sizeX, int sizeY){
         this.x = x;
         this.y = y;
         this.id = id;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
     }
 
     public abstract void tick();
@@ -55,5 +57,21 @@ public abstract class GameObject {
 
     public void setVelY(int velY) {
         this.velY = velY;
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
     }
 }
