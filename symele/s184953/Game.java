@@ -16,7 +16,9 @@ public class Game extends Canvas implements Runnable{
     public Game(){
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
-        this.addMouseMotionListener(new MouseInput((handler)));
+        Dragger dragger = new Dragger(handler);
+        this.addMouseListener(dragger);
+        this.addMouseMotionListener(dragger);
 
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
 
@@ -103,6 +105,16 @@ public class Game extends Canvas implements Runnable{
         }
         else{
             return var;
+        }
+    }
+
+    public static boolean inBoundsXY(Point mousePos, Point objectPos, Point objectSize){
+        if((mousePos.x >= objectPos.x) && (mousePos.x <= objectPos.x + objectSize.x) &&
+                (mousePos.y >= objectPos.y) && (mousePos.y <= objectPos.y + objectSize.y)){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
