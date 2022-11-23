@@ -31,8 +31,8 @@ public class Player extends GameObject {
         x = Game.clamp(x, 0, Game.WIDTH-sizeX);
         y = Game.clamp(y, 0, Game.HEIGHT-sizeY);
 
-        velX = Game.clamp(velX, -3, 3);
-        velY = Game.clamp(velY, -3, 3);
+        velX = Game.clamp(velX, -30, 30);
+        velY = Game.clamp(velY, -30, 30);
 
 
 

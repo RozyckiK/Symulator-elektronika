@@ -1,6 +1,5 @@
 package symele.s184953;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -12,18 +11,30 @@ public class Game extends Canvas implements Runnable{
     private boolean running = false;
 
     private Handler handler;
+    private Menu menu;
+
+    public enum STATE {
+        Menu,
+        Game1,
+        Game2
+    }
+
+    public STATE gameState = STATE.Menu;
 
     public Game(){
         handler = new Handler();
+        menu = new Menu(this, handler);
         this.addKeyListener(new KeyInput(handler));
         Dragger dragger = new Dragger(handler);
         this.addMouseListener(dragger);
         this.addMouseMotionListener(dragger);
+        this.addMouseListener(menu);
 
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
 
-
-        handler.addObject(new Player(100, 100, ID.Player , 32 ,32));
+        if(gameState == STATE.Game1){
+            handler.addObject(new Player(100, 100, ID.Player , 32 ,32));
+        }
     }
 
     public synchronized void start(){
@@ -65,7 +76,7 @@ public class Game extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                //System.out.println("FPS: " + frames);
+                System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }
@@ -74,6 +85,10 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
         handler.tick();
+
+        if(gameState == STATE.Menu){
+            menu.tick();
+        }
     }
 
     private void render(){
@@ -89,6 +104,10 @@ public class Game extends Canvas implements Runnable{
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
+
+        if(gameState == STATE.Menu){
+            menu.render(g);
+        }
 
         g.dispose();
         bs.show();
@@ -109,13 +128,8 @@ public class Game extends Canvas implements Runnable{
     }
 
     public static boolean inBoundsXY(Point mousePos, Point objectPos, Point objectSize){
-        if((mousePos.x >= objectPos.x) && (mousePos.x <= objectPos.x + objectSize.x) &&
-                (mousePos.y >= objectPos.y) && (mousePos.y <= objectPos.y + objectSize.y)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (mousePos.x >= objectPos.x) && (mousePos.x <= objectPos.x + objectSize.x) &&
+                (mousePos.y >= objectPos.y) && (mousePos.y <= objectPos.y + objectSize.y);
     }
 
     public static void main(String args[]){

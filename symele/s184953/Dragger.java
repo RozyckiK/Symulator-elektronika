@@ -88,36 +88,4 @@ public class Dragger implements MouseListener, MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
 
     }
-
-    /*public void Draggable(Handler handler){
-
-    }
-
-    public void mousePressed(MouseEvent e){
-
-    }
-
-    public void mouseReleased(MouseEvent e){
-
-    }
-
-    public void mouseDragged(MouseEvent e){
-        int mousePosX = e.getX();
-        int mousePosY = e.getY();
-
-
-        for(int i = 0; i < handler.object.size(); i++){
-            GameObject tempObject = handler.object.get(i);
-
-            if((tempObject.getId() == ID.Player)&&(Game.inBounds(mousePosX, tempObject.getX(), tempObject.getSizeX())) && (Game.inBounds(mousePosY, tempObject.getY(), tempObject.getSizeY()))){
-                tempObject.setY(mousePosY - tempObject.getSizeY()/2);
-                tempObject.setX(mousePosX - tempObject.getSizeX()/2);
-            }
-        }
-
-
-        System.out.println("X: "+mousePosX + " Y: "+mousePosY);
-    }*/
-
-
 }
