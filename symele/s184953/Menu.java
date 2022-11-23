@@ -43,7 +43,7 @@ public class Menu extends MouseAdapter {
     public void render(Graphics g){
         Font fnt = new Font("arial", 1 ,50);
         g.setFont(fnt);
-        g.setColor(Color.white);
+        g.setColor(Color.blue);
 
         g.drawString("Menu",Game.WIDTH/2-70,120);
 
