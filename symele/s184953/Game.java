@@ -19,7 +19,7 @@ public class Game extends Canvas implements Runnable{
         Game2
     }
 
-    public STATE gameState = STATE.Menu;
+    public STATE gameState = STATE.Game1;
 
     public Game(){
         handler = new Handler();

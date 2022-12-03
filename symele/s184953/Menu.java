@@ -3,11 +3,15 @@ package symele.s184953;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public class Menu extends MouseAdapter {
 
     private Game game;
     private Handler handler;
+
+    private BufferedImage gameButton;
+    private String direction;
 
     public Menu(Game game, Handler handler){
         this.game = game;
@@ -15,11 +19,26 @@ public class Menu extends MouseAdapter {
     }
 
     public void mousePressed(MouseEvent e) {
-        int mx = e.getX();
-        int my = e.getY();
+        if(game.gameState == Game.STATE.Menu) {
 
-        if(mouseOver(mx, my, Game.WIDTH*2/6-170, 180, 300, 150)){
-            game.gameState = Game.STATE.Game1;
+            int mx = e.getX();
+            int my = e.getY();
+
+            if(mouseOver(mx, my, Game.WIDTH*2/6-170, 180, 300, 150)){
+                game.gameState = Game.STATE.Game1;
+            }
+
+            if(mouseOver(mx, my, Game.WIDTH*4/6-130, 180, 300, 150)){
+
+            }
+
+            if(mouseOver(mx, my, Game.WIDTH*2/6-170, 380, 300, 150)){
+
+            }
+
+            if(mouseOver(mx, my, Game.WIDTH*4/6-130, 380, 300, 150)) {
+                System.exit(1);
+            }
         }
     }
 
