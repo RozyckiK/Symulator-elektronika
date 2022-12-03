@@ -12,6 +12,7 @@ public class Game extends Canvas implements Runnable{
 
     private Handler handler;
     private Menu menu;
+    private  Spawner spawner;
 
     public enum STATE {
         Menu,
@@ -19,11 +20,13 @@ public class Game extends Canvas implements Runnable{
         Game2
     }
 
-    public STATE gameState = STATE.Game1;
+    public STATE gameState = STATE.Menu;
 
     public Game(){
         handler = new Handler();
         menu = new Menu(this, handler);
+        spawner = new Spawner(handler, this);
+
         this.addKeyListener(new KeyInput(handler));
         Dragger dragger = new Dragger(handler);
         this.addMouseListener(dragger);
@@ -31,10 +34,6 @@ public class Game extends Canvas implements Runnable{
         this.addMouseListener(menu);
 
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
-
-        if(gameState == STATE.Game1){
-            handler.addObject(new Player(100, 100, ID.Player , 32 ,32));
-        }
     }
 
     public synchronized void start(){
@@ -85,6 +84,7 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
         handler.tick();
+        spawner.tick();
 
         if(gameState == STATE.Menu){
             menu.tick();
@@ -100,7 +100,7 @@ public class Game extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.black);
+        g.setColor(new Color(60, 63, 65));
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);

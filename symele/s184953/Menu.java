@@ -24,19 +24,11 @@ public class Menu extends MouseAdapter {
             int mx = e.getX();
             int my = e.getY();
 
-            if(mouseOver(mx, my, Game.WIDTH*2/6-170, 180, 300, 150)){
+            if(mouseOver(mx, my, Game.WIDTH*1/2-150, 180, 300, 150)){
                 game.gameState = Game.STATE.Game1;
             }
 
-            if(mouseOver(mx, my, Game.WIDTH*4/6-130, 180, 300, 150)){
-
-            }
-
-            if(mouseOver(mx, my, Game.WIDTH*2/6-170, 380, 300, 150)){
-
-            }
-
-            if(mouseOver(mx, my, Game.WIDTH*4/6-130, 380, 300, 150)) {
+            if(mouseOver(mx, my, Game.WIDTH*1/2-150, 380, 300, 150)) {
                 System.exit(1);
             }
         }
@@ -62,22 +54,15 @@ public class Menu extends MouseAdapter {
     public void render(Graphics g){
         Font fnt = new Font("arial", 1 ,50);
         g.setFont(fnt);
-        g.setColor(Color.blue);
+        g.setColor(Color.white);
 
         g.drawString("Menu",Game.WIDTH/2-70,120);
 
-        g.drawRect(Game.WIDTH*2/6-170, 180, 300, 150);
-        g.drawString("Graj",Game.WIDTH*2/6-70,270);
-
-        g.drawRect(Game.WIDTH*4/6-130, 180, 300, 150);
-        g.drawString("Lorem",Game.WIDTH*4/6-70,270);
-
-        g.drawRect(Game.WIDTH*2/6-170, 380, 300, 150);
-        g.drawString("Lorem",Game.WIDTH*2/6-100, 480);
-
-        g.drawRect(Game.WIDTH*4/6-130, 380, 300, 150);
-        g.drawString("Wyjdź",Game.WIDTH*4/6-60,480);
+        g.drawRect(Game.WIDTH*1/2-150, 180, 300, 150);
+        g.drawString("Graj",Game.WIDTH*1/2-70,270);
 
 
+        g.drawRect(Game.WIDTH*1/2-150, 380, 300, 150);
+        g.drawString("Wyjdź",Game.WIDTH*1/2-60,480);
     }
 }

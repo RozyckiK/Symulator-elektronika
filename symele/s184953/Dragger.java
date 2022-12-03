@@ -32,9 +32,10 @@ public class Dragger implements MouseListener, MouseMotionListener {
 
             objectPos = new Point((int) checkObject.getX(),(int) checkObject.getY());
             objectSize = new Point((int) checkObject.getSizeX(),(int) checkObject.getSizeY());
-            mouseAnchor = new Point((int)(startLoc.x-objectPos.x),(int)(startLoc.y-objectPos.y));
+
 
             if((checkObject.getId() == ID.Player) && Game.inBoundsXY(startLoc, objectPos, objectSize)){
+                mouseAnchor = new Point((int)(startLoc.x-objectPos.x),(int)(startLoc.y-objectPos.y));
                 tempObject = checkObject;
                 tempObject.setVelX(0);
                 tempObject.setVelY(0);

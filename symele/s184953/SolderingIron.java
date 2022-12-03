@@ -2,9 +2,10 @@ package symele.s184953;
 
 import java.awt.*;
 
-public class Player extends GameObject {
+public class SolderingIron extends GameObject{
 
-    public Player(int x, int y, ID id, int sizeX, int sizeY) {
+
+    public SolderingIron(int x, int y, ID id, int sizeX, int sizeY) {
         super(x, y, id, sizeX, sizeY);
         velX = 0;
         velY = 0;
@@ -16,7 +17,7 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
-        if(tickCount == 5){
+        if(tickCount == 2){
             if(velX > 0 ) {velX -= 0.1;}
 
             if(velX < 0 ) {velX += 0.1;}
@@ -48,7 +49,7 @@ public class Player extends GameObject {
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.red);
+        g.setColor(new Color(43,43,43));
         g.fillRect(x, y, sizeX, sizeY);
     }
 }
