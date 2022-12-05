@@ -11,7 +11,7 @@ public class Dragger implements MouseListener, MouseMotionListener {
     GameObject tempObject, checkObject;
     int lastX = 0, lastY = 0, velX, velY;
 
-    private Handler handler;
+    private final Handler handler;
 
     public Dragger(Handler handler){
         this.handler = handler;
@@ -24,18 +24,18 @@ public class Dragger implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        startLoc = new Point((int) e.getX(),(int) e.getY());
+        startLoc = new Point(e.getX(), e.getY());
 
         for(int i = 0; i < handler.object.size(); i++) {
             checkObject = handler.object.get(i);
 
 
-            objectPos = new Point((int) checkObject.getX(),(int) checkObject.getY());
-            objectSize = new Point((int) checkObject.getSizeX(),(int) checkObject.getSizeY());
+            objectPos = new Point(checkObject.getX(), checkObject.getY());
+            objectSize = new Point(checkObject.getSizeX(), checkObject.getSizeY());
 
 
             if((checkObject.getId() == ID.Player) && Game.inBoundsXY(startLoc, objectPos, objectSize)){
-                mouseAnchor = new Point((int)(startLoc.x-objectPos.x),(int)(startLoc.y-objectPos.y));
+                mouseAnchor = new Point(startLoc.x-objectPos.x, startLoc.y-objectPos.y);
                 tempObject = checkObject;
                 tempObject.setVelX(0);
                 tempObject.setVelY(0);
@@ -71,12 +71,15 @@ public class Dragger implements MouseListener, MouseMotionListener {
         if(tempObject != null) {
 
 
-            mousePos = new Point((int) e.getX(), (int) e.getY());
+            mousePos = new Point(e.getX(), e.getY());
             velX = mousePos.x - lastX;
             velY = mousePos.y - lastY;
 
-            tempObject.setX(mousePos.x - mouseAnchor.x);
-            tempObject.setY(mousePos.y - mouseAnchor.y);
+            int setX = Game.clamp(mousePos.x - mouseAnchor.x, 0, Game.WIDTH-tempObject.getSizeX());
+            int setY = Game.clamp(mousePos.y - mouseAnchor.y, 70, Game.HEIGHT-tempObject.getSizeY());
+
+            tempObject.setX(setX);
+            tempObject.setY(setY);
 
             lastX = mousePos.x;
             lastY = mousePos.y;

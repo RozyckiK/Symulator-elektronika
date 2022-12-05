@@ -13,6 +13,7 @@ public class Game extends Canvas implements Runnable{
     private Handler handler;
     private Menu menu;
     private  Spawner spawner;
+    private Hud hud;
 
     public enum STATE {
         Menu,
@@ -26,12 +27,14 @@ public class Game extends Canvas implements Runnable{
         handler = new Handler();
         menu = new Menu(this, handler);
         spawner = new Spawner(handler, this);
+        hud = new Hud(handler, this);
 
         this.addKeyListener(new KeyInput(handler));
         Dragger dragger = new Dragger(handler);
         this.addMouseListener(dragger);
         this.addMouseMotionListener(dragger);
         this.addMouseListener(menu);
+        this.addMouseListener(hud);
 
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
     }
@@ -89,6 +92,10 @@ public class Game extends Canvas implements Runnable{
         if(gameState == STATE.Menu){
             menu.tick();
         }
+
+        if(gameState == STATE.Game1){
+            hud.tick();
+        }
     }
 
     private void render(){
@@ -107,6 +114,10 @@ public class Game extends Canvas implements Runnable{
 
         if(gameState == STATE.Menu){
             menu.render(g);
+        }
+
+        if(gameState == STATE.Game1){
+            hud.render(g);
         }
 
         g.dispose();
@@ -130,6 +141,14 @@ public class Game extends Canvas implements Runnable{
     public static boolean inBoundsXY(Point mousePos, Point objectPos, Point objectSize){
         return (mousePos.x >= objectPos.x) && (mousePos.x <= objectPos.x + objectSize.x) &&
                 (mousePos.y >= objectPos.y) && (mousePos.y <= objectPos.y + objectSize.y);
+    }
+
+    public static boolean mouseOver(int mx, int my, int x, int y, int width, int height){
+        if(mx > x && mx < x + width){
+            if(my > y && my < y + height){
+                return true;
+            } else return false;
+        } else return false;
     }
 
     public static void main(String args[]){

@@ -1,9 +1,11 @@
 package symele.s184953;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Menu extends MouseAdapter {
 
@@ -24,11 +26,11 @@ public class Menu extends MouseAdapter {
             int mx = e.getX();
             int my = e.getY();
 
-            if(mouseOver(mx, my, Game.WIDTH*1/2-150, 180, 300, 150)){
+            if(game.mouseOver(mx, my, Game.WIDTH*1/2-150, 180, 300, 150)){
                 game.gameState = Game.STATE.Game1;
             }
 
-            if(mouseOver(mx, my, Game.WIDTH*1/2-150, 380, 300, 150)) {
+            if(game.mouseOver(mx, my, Game.WIDTH*1/2-150, 380, 300, 150)) {
                 System.exit(1);
             }
         }
@@ -39,13 +41,7 @@ public class Menu extends MouseAdapter {
 
     }
 
-    private boolean mouseOver(int mx, int my, int x, int y, int width, int height){
-        if(mx > x && mx < x + width){
-            if(my > y && my < y + height){
-                return true;
-            } else return false;
-        } else return false;
-    }
+
 
     public void tick(){
 
@@ -56,13 +52,22 @@ public class Menu extends MouseAdapter {
         g.setFont(fnt);
         g.setColor(Color.white);
 
+        try{
+            g.drawImage(ImageIO.read(getClass().getResourceAsStream("res/StandartButtonNormal2.png")),Game.WIDTH*1/2-150, 180, 300, 150, null );
+            g.drawImage(ImageIO.read(getClass().getResourceAsStream("res/StandartButtonNormal3.png")),Game.WIDTH*1/2-150, 380, 300, 150, null );
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
         g.drawString("Menu",Game.WIDTH/2-70,120);
 
-        g.drawRect(Game.WIDTH*1/2-150, 180, 300, 150);
+
+        //g.drawRect(Game.WIDTH*1/2-150, 180, 300, 150);
         g.drawString("Graj",Game.WIDTH*1/2-70,270);
 
 
-        g.drawRect(Game.WIDTH*1/2-150, 380, 300, 150);
-        g.drawString("Wyjdź",Game.WIDTH*1/2-60,480);
+       // g.drawRect(Game.WIDTH*1/2-150, 380, 300, 150);
+        g.drawString("Wyjdź",Game.WIDTH*1/2-80,470);
     }
 }

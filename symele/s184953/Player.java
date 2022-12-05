@@ -29,7 +29,7 @@ public class Player extends GameObject {
         }
 
         x = (int) Game.clamp(x, 0, Game.WIDTH-sizeX);
-        y = (int) Game.clamp(y, 0, Game.HEIGHT-sizeY);
+        y = (int) Game.clamp(y, 70, Game.HEIGHT-sizeY);
 
         velX = Game.clamp(velX, -30, 30);
         velY = Game.clamp(velY, -30, 30);
