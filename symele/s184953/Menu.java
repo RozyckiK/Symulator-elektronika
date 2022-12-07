@@ -1,73 +1,69 @@
 package symele.s184953;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-public class Menu extends MouseAdapter {
+public class Menu{
 
     private Game game;
     private Handler handler;
+    private ResLoader loader;
 
-    private BufferedImage gameButton;
-    private String direction;
+    private Button playButton;
+    private Button exitButton;
 
-    public Menu(Game game, Handler handler){
+    public Menu(Game game, Handler handler, ResLoader loader){
         this.game = game;
         this.handler = handler;
-    }
+        this.loader = loader;
 
-    public void mousePressed(MouseEvent e) {
-        if(game.gameState == Game.STATE.Menu) {
+        playButton = new Button(handler, game, loader,Game.WIDTH*1/2 - 150,200,300,130);
+        game.addMouseListener(playButton);
+        game.addMouseMotionListener(playButton);
 
-            int mx = e.getX();
-            int my = e.getY();
-
-            if(game.mouseOver(mx, my, Game.WIDTH*1/2-150, 180, 300, 150)){
-                game.gameState = Game.STATE.Game1;
-            }
-
-            if(game.mouseOver(mx, my, Game.WIDTH*1/2-150, 380, 300, 150)) {
-                System.exit(1);
-            }
-        }
-    }
-
-
-    public void mouseReleased(MouseEvent e) {
-
+        exitButton = new Button(handler, game, loader,Game.WIDTH*1/2 - 150,400,300, 130);
+        game.addMouseListener(exitButton);
+        game.addMouseMotionListener(exitButton);
     }
 
 
 
     public void tick(){
+        playButton.tick();
+        exitButton.tick();
 
+        if(playButton.buttonAction){
+            playButton.setBackActionButton();
+            game.gameState = Game.STATE.Game1;
+            System.out.println(game.gameState);
+        }
+
+        if(exitButton.buttonAction){
+            exitButton.setBackActionButton();
+            System.exit(1);
+        }
     }
 
     public void render(Graphics g){
-        Font fnt = new Font("arial", 1 ,50);
-        g.setFont(fnt);
+
+        //font setup for MENU
+        Font currentFont = loader.chakraPetchBold;
+        Font newFont = currentFont.deriveFont(currentFont.getSize() * 150F);
+        g.setFont(newFont);
         g.setColor(Color.white);
 
-        try{
-            g.drawImage(ImageIO.read(getClass().getResourceAsStream("res/StandartButtonNormal2.png")),Game.WIDTH*1/2-150, 180, 300, 150, null );
-            g.drawImage(ImageIO.read(getClass().getResourceAsStream("res/StandartButtonNormal3.png")),Game.WIDTH*1/2-150, 380, 300, 150, null );
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        g.drawString("Menu",Game.WIDTH/2-200,140);
+
+        //rendering buttons
+        playButton.render(g);
+        exitButton.render(g);
 
 
-        g.drawString("Menu",Game.WIDTH/2-70,120);
+        //font size setup for buttons
+        newFont = currentFont.deriveFont(currentFont.getSize() * 50F);
+        g.setFont(newFont);
+        g.setColor(new Color(64, 68, 70 ));
 
-
-        //g.drawRect(Game.WIDTH*1/2-150, 180, 300, 150);
-        g.drawString("Graj",Game.WIDTH*1/2-70,270);
-
-
-       // g.drawRect(Game.WIDTH*1/2-150, 380, 300, 150);
-        g.drawString("Wyjdź",Game.WIDTH*1/2-80,470);
+        g.drawString("Graj",Game.WIDTH*1/2-70,280);
+        g.drawString("Wyjdź",Game.WIDTH*1/2-80,480);
     }
 }

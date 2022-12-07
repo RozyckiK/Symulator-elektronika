@@ -12,8 +12,9 @@ public class Game extends Canvas implements Runnable{
 
     private Handler handler;
     private Menu menu;
-    private  Spawner spawner;
+    private Spawner spawner;
     private Hud hud;
+    private ResLoader loader;
 
     public enum STATE {
         Menu,
@@ -25,17 +26,20 @@ public class Game extends Canvas implements Runnable{
 
     public Game(){
         handler = new Handler();
-        menu = new Menu(this, handler);
+        loader = new ResLoader(handler);
+        menu = new Menu(this, handler, loader);
         spawner = new Spawner(handler, this);
-        hud = new Hud(handler, this);
+        hud = new Hud(handler, this, loader);
+        Dragger dragger = new Dragger(handler);
 
         this.addKeyListener(new KeyInput(handler));
-        Dragger dragger = new Dragger(handler);
+
         this.addMouseListener(dragger);
         this.addMouseMotionListener(dragger);
-        this.addMouseListener(menu);
-        this.addMouseListener(hud);
 
+        loader.getBackgroundImage();
+        loader.getFont();
+        loader.getMenuButtonImage();
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
     }
 
@@ -107,8 +111,9 @@ public class Game extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(new Color(60, 63, 65));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        //g.setColor(new Color(60, 63, 65));
+        g.drawImage(loader.backGround, 0 , 0 ,WIDTH, HEIGHT, null);
+        //g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
 
