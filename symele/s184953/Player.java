@@ -16,7 +16,7 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
-        if(tickCount == 5){
+        if(tickCount == 500){
             if(velX > 0 ) {velX -= 0.1;}
 
             if(velX < 0 ) {velX += 0.1;}
@@ -40,7 +40,7 @@ public class Player extends GameObject {
             velX = velX * -1;
         }
 
-        if(y+sizeY >= Game.HEIGHT || y <= 0){
+        if(y+sizeY >= Game.HEIGHT || y <= 70){
             velY = velY * -1;
         }
 

@@ -25,21 +25,19 @@ public class Game extends Canvas implements Runnable{
     public STATE gameState = STATE.Menu;
 
     public Game(){
+        //------------------------------------------------
         handler = new Handler();
         loader = new ResLoader(handler);
         menu = new Menu(this, handler, loader);
         spawner = new Spawner(handler, this);
         hud = new Hud(handler, this, loader);
         Dragger dragger = new Dragger(handler);
-
+        //------------------------------------------------
         this.addKeyListener(new KeyInput(handler));
-
         this.addMouseListener(dragger);
         this.addMouseMotionListener(dragger);
-
-        loader.getBackgroundImage();
-        loader.getFont();
-        loader.getMenuButtonImage();
+        //-----------------------------------------------
+        loader.loadAllAssets();
         new Window(WIDTH, HEIGHT, "Symulator elektronika", this);
     }
 
@@ -71,14 +69,17 @@ public class Game extends Canvas implements Runnable{
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
-            while(delta >= 1){
+
+            while(delta >= 1) {
                 tick();
                 delta--;
+
+
+                if (running) {
+                    render();
+                }
+                frames++;
             }
-            if(running){
-                render();
-            }
-            frames++;
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
@@ -111,9 +112,7 @@ public class Game extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        //g.setColor(new Color(60, 63, 65));
         g.drawImage(loader.backGround, 0 , 0 ,WIDTH, HEIGHT, null);
-        //g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
 

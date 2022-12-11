@@ -40,8 +40,6 @@ public class Hud{
         menuButton.render(g);
         g.drawLine(0,70, Game.WIDTH, 70);
         g.drawString("Menu",Game.WIDTH-105,45);
-
-
     }
 
 

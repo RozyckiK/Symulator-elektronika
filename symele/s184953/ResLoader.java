@@ -19,21 +19,22 @@ public class ResLoader {
     }
 
 
-    public void getMenuButtonImage() {
+    public void loadAllAssets(){
+        getMenuButtonImage();
+        getBackgroundImage();
+        getFont();
+    }
+    private void getMenuButtonImage() {
         try {
-            //menuButtonNormal = ImageIO.read(getClass().getResourceAsStream("res/StandartButtonV1/StandartButtonNormal/StandartButtonNormal2.png"));
-            //menuButtonHover = ImageIO.read(getClass().getResourceAsStream("res/StandartButtonV1/StandartButtonHover/StandartButtonHover2.png"));
-            //menuButtonClick = ImageIO.read(getClass().getResourceAsStream("res/StandartButtonV1/StandartButtonActive/StandartButtonActive2.png"));
-
-            menuButtonNormal = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/button4.png"));
-            menuButtonHover = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/buttonhover4.png"));
-            menuButtonClick = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/buttonpress4.png"));
+            menuButtonNormal = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/button.png"));
+            menuButtonHover = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/buttonhover.png"));
+            menuButtonClick = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/buttonpress.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void getBackgroundImage(){
+    private void getBackgroundImage(){
         try {
             backGround = ImageIO.read(getClass().getResourceAsStream("res/backGround/backGround.png"));
         } catch (IOException e) {
@@ -41,7 +42,7 @@ public class ResLoader {
         }
     }
 
-    public void getFont(){
+    private void getFont(){
         try {
             InputStream is = getClass().getResourceAsStream("res/font/ChakraPetch-Regular.ttf");
             chakraPetch = Font.createFont(Font.TRUETYPE_FONT, is);
