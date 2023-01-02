@@ -11,7 +11,8 @@ public class ResLoader {
     private Handler handler;
 
     public BufferedImage menuButtonNormal, menuButtonHover, menuButtonClick;
-    public BufferedImage backGround;
+    public BufferedImage backGroundMenu, backGroundGame;
+    public BufferedImage solderingIron;
     public Font chakraPetch, chakraPetchBold;
 
     public ResLoader(Handler handler){
@@ -23,6 +24,7 @@ public class ResLoader {
         getMenuButtonImage();
         getBackgroundImage();
         getFont();
+        getGameObjectImage();
     }
     private void getMenuButtonImage() {
         try {
@@ -36,7 +38,8 @@ public class ResLoader {
 
     private void getBackgroundImage(){
         try {
-            backGround = ImageIO.read(getClass().getResourceAsStream("res/backGround/backGround.png"));
+            backGroundMenu = ImageIO.read(getClass().getResourceAsStream("res/backGround/backGround.png"));
+            backGroundGame = ImageIO.read((getClass().getResourceAsStream("res/backGround/backGroundGame.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,6 +53,14 @@ public class ResLoader {
             chakraPetchBold = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getGameObjectImage(){
+        try {
+            solderingIron = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solderingIron/solderingIron.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

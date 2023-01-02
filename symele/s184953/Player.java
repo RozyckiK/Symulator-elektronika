@@ -16,7 +16,7 @@ public class Player extends GameObject {
         x += velX;
         y += velY;
 
-        if(tickCount == 500){
+        if(tickCount == 30){
             if(velX > 0 ) {velX -= 0.1;}
 
             if(velX < 0 ) {velX += 0.1;}
@@ -50,5 +50,8 @@ public class Player extends GameObject {
     public void render(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(x, y, sizeX, sizeY);
+
+        //Napisać kod odpowiadający za wgrywanie obrazu
+        //g.drawImage(, x, y, width, height, null);
     }
 }

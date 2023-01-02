@@ -112,7 +112,11 @@ public class Game extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        g.drawImage(loader.backGround, 0 , 0 ,WIDTH, HEIGHT, null);
+
+        if(gameState == STATE.Menu)
+            g.drawImage(loader.backGroundMenu, 0 , 0 ,WIDTH, HEIGHT, null);
+        else
+            g.drawImage(loader.backGroundGame, 0 , 0 ,WIDTH, HEIGHT, null);
 
         handler.render(g);
 

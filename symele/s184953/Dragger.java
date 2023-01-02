@@ -70,7 +70,6 @@ public class Dragger implements MouseListener, MouseMotionListener {
 
         if(tempObject != null) {
 
-
             mousePos = new Point(e.getX(), e.getY());
             velX = mousePos.x - lastX;
             velY = mousePos.y - lastY;
