@@ -19,6 +19,7 @@ public class Game extends Canvas implements Runnable{
     public enum STATE {
         Menu,
         Game1,
+        Game1FinalResult,
         Game2
     }
 
@@ -29,8 +30,8 @@ public class Game extends Canvas implements Runnable{
         handler = new Handler();
         loader = new ResLoader(handler);
         menu = new Menu(this, handler, loader);
-        spawner = new Spawner(handler, this);
         hud = new Hud(handler, this, loader);
+        spawner = new Spawner(handler, this, loader, hud);
         Dragger dragger = new Dragger(handler);
         //------------------------------------------------
         this.addKeyListener(new KeyInput(handler));
@@ -113,20 +114,19 @@ public class Game extends Canvas implements Runnable{
         Graphics g = bs.getDrawGraphics();
 
 
-        if(gameState == STATE.Menu)
-            g.drawImage(loader.backGroundMenu, 0 , 0 ,WIDTH, HEIGHT, null);
-        else
-            g.drawImage(loader.backGroundGame, 0 , 0 ,WIDTH, HEIGHT, null);
-
-        handler.render(g);
-
         if(gameState == STATE.Menu){
+            g.drawImage(loader.backGroundMenu, 0 , 0 ,WIDTH, HEIGHT, null);
             menu.render(g);
         }
-
-        if(gameState == STATE.Game1){
+        else if(gameState == STATE.Game1){
+            g.drawImage(loader.backGroundGame, 0 , 0 ,WIDTH, HEIGHT, null);
             hud.render(g);
         }
+        else if(gameState == STATE.Game1FinalResult){
+            g.drawImage(loader.backGroundMenu, 0 , 0 ,WIDTH, HEIGHT, null);
+        }
+
+        handler.render(g);
 
         g.dispose();
         bs.show();

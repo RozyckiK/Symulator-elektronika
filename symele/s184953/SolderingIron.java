@@ -1,14 +1,21 @@
 package symele.s184953;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class SolderingIron extends GameObject{
 
+    private BufferedImage solderingIronImage;
 
-    public SolderingIron(int x, int y, ID id, int sizeX, int sizeY) {
+    public SolderingIron(int x, int y, ID id, int sizeX, int sizeY,BufferedImage solderingIronImage) {
         super(x, y, id, sizeX, sizeY);
         velX = 0;
         velY = 0;
+        this.solderingIronImage = solderingIronImage;
+    }
+
+    public Rectangle getBounds(){
+        return new Rectangle(x+38, y+230 ,19, 25);
     }
 
     int tickCount = 0;
@@ -49,7 +56,6 @@ public class SolderingIron extends GameObject{
     }
 
     public void render(Graphics g) {
-        g.setColor(new Color(43,43,43));
-        g.fillRect(x, y, sizeX, sizeY);
+        g.drawImage(solderingIronImage, x, y, sizeX, sizeY, null);
     }
 }

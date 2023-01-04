@@ -34,7 +34,7 @@ public class Dragger implements MouseListener, MouseMotionListener {
             objectSize = new Point(checkObject.getSizeX(), checkObject.getSizeY());
 
 
-            if((checkObject.getId() == ID.Player) && Game.inBoundsXY(startLoc, objectPos, objectSize)){
+            if((checkObject.getId() == ID.SolderingIron) && Game.inBoundsXY(startLoc, objectPos, objectSize)){
                 mouseAnchor = new Point(startLoc.x-objectPos.x, startLoc.y-objectPos.y);
                 tempObject = checkObject;
                 tempObject.setVelX(0);

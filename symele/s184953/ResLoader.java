@@ -13,6 +13,8 @@ public class ResLoader {
     public BufferedImage menuButtonNormal, menuButtonHover, menuButtonClick;
     public BufferedImage backGroundMenu, backGroundGame;
     public BufferedImage solderingIron;
+
+    public BufferedImage solderStart, solderBetter, solderPerfect, solderBurned;
     public Font chakraPetch, chakraPetchBold;
 
     public ResLoader(Handler handler){
@@ -61,6 +63,12 @@ public class ResLoader {
     private void getGameObjectImage(){
         try {
             solderingIron = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solderingIron/solderingIron.png"));
+
+            solderStart = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solder/solderStart.png"));
+            solderBetter = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solder/solderBetter.png"));
+            solderPerfect = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solder/solderPerfect.png"));
+            solderBurned = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solder/solderBurned.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

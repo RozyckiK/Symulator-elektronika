@@ -1,7 +1,7 @@
 package symele.s184953;
 
 import java.awt.*;
-
+import java.awt.image.BufferedImage;
 public class Player extends GameObject {
 
     public Player(int x, int y, ID id, int sizeX, int sizeY) {
@@ -10,6 +10,9 @@ public class Player extends GameObject {
         velY = 0;
     }
 
+    public Rectangle getBounds(){
+        return new Rectangle(x, y ,sizeX, sizeY);
+    }
     int tickCount = 0;
     public void tick() {
 
@@ -28,8 +31,8 @@ public class Player extends GameObject {
             tickCount = 0;
         }
 
-        x = (int) Game.clamp(x, 0, Game.WIDTH-sizeX);
-        y = (int) Game.clamp(y, 70, Game.HEIGHT-sizeY);
+        x = Game.clamp(x, 0, Game.WIDTH-sizeX);
+        y = Game.clamp(y, 70, Game.HEIGHT-sizeY);
 
         velX = Game.clamp(velX, -30, 30);
         velY = Game.clamp(velY, -30, 30);
