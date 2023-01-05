@@ -11,6 +11,13 @@ public class Solder extends GameObject{
 
     private Hud hud;
 
+    private Hud.SOLDERSTATE solderstate;
+
+    //Setting difficulty level
+    private int[] better = {1000, 1000, 1000, 1000, 1000};
+    private int[] perfect = {1500, 1400, 1300, 1200, 1100};
+    private int[] burned = {2000, 1800, 1600, 1400, 1200};
+
     private int burningScore = 0;
     public Solder(int x, int y, ID id, int sizeX, int sizeY, ResLoader loader, Handler handler, Hud hud) {
         super(x, y, id, sizeX, sizeY);
@@ -24,18 +31,26 @@ public class Solder extends GameObject{
     }
 
     public void tick() {
+
         solderImage = loader.solderStart;
         collision();
 
-        if(burningScore < 1000){
+        if(burningScore < better[hud.getLevel()]){
             solderImage = loader.solderStart;
-        } else if (burningScore < 2000) {
+            solderstate = Hud.SOLDERSTATE.start;
+        } else if (burningScore < perfect[hud.getLevel()]) {
             solderImage = loader.solderBetter;
-        } else if (burningScore < 3000) {
+            solderstate = Hud.SOLDERSTATE.better;
+        } else if (burningScore < burned[hud.getLevel()]) {
             solderImage = loader.solderPerfect;
+            solderstate = Hud.SOLDERSTATE.perfect;
         }else {
             solderImage = loader.solderBurned;
+            solderstate = Hud.SOLDERSTATE.burned;
         }
+
+        int level = hud.getLevel();
+        hud.setLevelResult(level, solderstate);
     }
 
     private void collision(){
@@ -45,7 +60,6 @@ public class Solder extends GameObject{
             if(tempObject.getId() == ID.SolderingIron){
                 if(getBounds().intersects(tempObject.getBounds())){
                     burningScore += 1 * (hud.getTemperature()-290)/10;
-                    System.out.println(burningScore);
                 }
             }
         }

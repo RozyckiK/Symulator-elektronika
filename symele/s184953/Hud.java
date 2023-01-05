@@ -10,6 +10,15 @@ public class Hud{
 
     private String levelChangerString;
 
+    public enum SOLDERSTATE{
+        start,
+        better,
+        perfect,
+        burned
+    }
+
+    public SOLDERSTATE[] levelResult = {SOLDERSTATE.start, SOLDERSTATE.start, SOLDERSTATE.start, SOLDERSTATE.start, SOLDERSTATE.start};
+
     private int temperature = 320, level = 1;
 
     public Hud(Handler handler, Game game, ResLoader loader){
@@ -56,7 +65,15 @@ public class Hud{
 
         if(levelChanger.buttonAction){
             levelChanger.setBackActionButton();
+
+
             level += 1;
+
+
+
+            handler.clearAllObjects();
+            handler.addObject(new Solder(378, 552, ID.Solder,128,48, loader, handler, this));
+            handler.addObject(new SolderingIron(200, 100, ID.SolderingIron, 2*48,2*128,loader.solderingIron));
         }
     }
 
@@ -76,7 +93,7 @@ public class Hud{
         }else if(level < 4){
             levelChangerString = "Koniec";
         }else{
-            game.gameState = Game.STATE.Game1FinalResult;
+            game.gameState = Game.STATE.GameFinalResult;
         }
     }
 
@@ -107,5 +124,21 @@ public class Hud{
         newFont = currentFont.deriveFont(currentFont.getSize() * 28F);
         g.setFont(newFont);
         g.drawString(levelChangerString,Game.WIDTH-299,45);
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public void setLevel(int x){
+        level = x;
+    }
+
+    public void setLevelResult(int x, SOLDERSTATE solderstate){
+        levelResult[x] = solderstate;
+    }
+
+    public SOLDERSTATE getLevelResult(int x){
+        return levelResult[x];
     }
 }

@@ -63,7 +63,7 @@ public class Button implements MouseListener, MouseMotionListener {
         int mx = e.getX();
         int my = e.getY();
 
-        if(game.mouseOver(mx, my, x, y, width, height)){
+        if(game.mouseOver(mx, my, x, y, width, height)&& buttonState == BUTTONSTATUS.Click){
             buttonAction = true;
         }
     }

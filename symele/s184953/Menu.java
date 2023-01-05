@@ -20,7 +20,7 @@ public class Menu{
         game.addMouseListener(playButton);
         game.addMouseMotionListener(playButton);
 
-        exitButton = new Button(handler, game, loader,Game.WIDTH*1/2 - 150,400,300, 130);
+        exitButton = new Button(handler, game, loader,Game.WIDTH*1/2 - 150,350,300, 130);
         game.addMouseListener(exitButton);
         game.addMouseMotionListener(exitButton);
     }
@@ -33,8 +33,7 @@ public class Menu{
 
         if(playButton.buttonAction){
             playButton.setBackActionButton();
-            game.gameState = Game.STATE.Game1;
-            System.out.println(game.gameState);
+            game.gameState = Game.STATE.Game;
         }
 
         if(exitButton.buttonAction){
@@ -64,6 +63,6 @@ public class Menu{
         g.setColor(new Color(64, 68, 70 ));
 
         g.drawString("Graj",Game.WIDTH*1/2-70,280);
-        g.drawString("Wyjdź",Game.WIDTH*1/2-80,480);
+        g.drawString("Wyjdź",Game.WIDTH*1/2-80,430);
     }
 }

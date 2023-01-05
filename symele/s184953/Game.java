@@ -15,12 +15,12 @@ public class Game extends Canvas implements Runnable{
     private Spawner spawner;
     private Hud hud;
     private ResLoader loader;
+    private Game1FinalResult game1FinalResult;
 
     public enum STATE {
         Menu,
-        Game1,
-        Game1FinalResult,
-        Game2
+        Game,
+        GameFinalResult,
     }
 
     public STATE gameState = STATE.Menu;
@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable{
         menu = new Menu(this, handler, loader);
         hud = new Hud(handler, this, loader);
         spawner = new Spawner(handler, this, loader, hud);
+        game1FinalResult = new Game1FinalResult(this,handler,loader,hud);
         Dragger dragger = new Dragger(handler);
         //------------------------------------------------
         this.addKeyListener(new KeyInput(handler));
@@ -84,7 +85,7 @@ public class Game extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS: " + frames);
+                //System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }
@@ -99,8 +100,12 @@ public class Game extends Canvas implements Runnable{
             menu.tick();
         }
 
-        if(gameState == STATE.Game1){
+        if(gameState == STATE.Game){
             hud.tick();
+        }
+
+        if(gameState == STATE.GameFinalResult){
+            game1FinalResult.tick();
         }
     }
 
@@ -118,12 +123,13 @@ public class Game extends Canvas implements Runnable{
             g.drawImage(loader.backGroundMenu, 0 , 0 ,WIDTH, HEIGHT, null);
             menu.render(g);
         }
-        else if(gameState == STATE.Game1){
+        else if(gameState == STATE.Game){
             g.drawImage(loader.backGroundGame, 0 , 0 ,WIDTH, HEIGHT, null);
             hud.render(g);
         }
-        else if(gameState == STATE.Game1FinalResult){
+        else if(gameState == STATE.GameFinalResult){
             g.drawImage(loader.backGroundMenu, 0 , 0 ,WIDTH, HEIGHT, null);
+            game1FinalResult.render(g);
         }
 
         handler.render(g);

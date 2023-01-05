@@ -18,13 +18,13 @@ public class Spawner {
     }
 
     public void tick(){
-        if(game.gameState == Game.STATE.Game1 && !alreadySpawned){
+        if(game.gameState == Game.STATE.Game && !alreadySpawned){
             handler.addObject(new Solder(378, 552, ID.Solder,128,48, loader, handler, hud));
             handler.addObject(new SolderingIron(200, 100, ID.SolderingIron, 2*48,2*128,loader.solderingIron));
             alreadySpawned = true;
         }
 
-        if(game.gameState == Game.STATE.Game1FinalResult && alreadySpawned){
+        if(game.gameState == Game.STATE.GameFinalResult && alreadySpawned){
             handler.clearAllObjects();
             alreadySpawned = false;
         }
@@ -33,5 +33,7 @@ public class Spawner {
             handler.clearAllObjects();
             alreadySpawned = false;
         }
+
+
     }
 }
