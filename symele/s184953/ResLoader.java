@@ -6,28 +6,64 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Klasa odpowiadjąca za ładowanie zasobów gry
+ * @author Kacper Różycki
+ */
 public class ResLoader {
 
+    /**
+     * Deklaracja instancji handlera
+     */
     private Handler handler;
 
+    /**
+     * Deklaracja obrazów dla przycisku
+     */
     public BufferedImage menuButtonNormal, menuButtonHover, menuButtonClick;
+
+    /**
+     * Deklaracja obrazów dla tła
+     */
     public BufferedImage backGroundMenu, backGroundGame;
+
+    /**
+     * Deklarcja obrazu lutownicy
+     */
     public BufferedImage solderingIron;
 
+    /**
+     * Deklaracja obrazów spoiwa
+     */
     public BufferedImage solderStart, solderBetter, solderPerfect, solderBurned;
+
+    /**
+     * Deklaracja czionek
+     */
     public Font chakraPetch, chakraPetchBold;
 
+    /**
+     * Konstruktor klasy ResLoader
+     * @param handler przekazuje handler
+     */
     public ResLoader(Handler handler){
         this.handler = handler;
     }
 
-
+    /**
+     * <p>Metoda wywołująca inne metody odpowiedzialne za ładowanie obrazów</p>
+     * <p>Rozbie na kilka metod w celu uporządkowania kodu</p>
+     */
     public void loadAllAssets(){
         getMenuButtonImage();
         getBackgroundImage();
         getFont();
         getGameObjectImage();
     }
+
+    /**
+     * Metoda odpowiedzilna za ładowanie obrazów przycisku
+     */
     private void getMenuButtonImage() {
         try {
             menuButtonNormal = ImageIO.read(getClass().getResourceAsStream("res/StandardButton/button.png"));
@@ -38,6 +74,9 @@ public class ResLoader {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za ładowanie obrazów tła
+     */
     private void getBackgroundImage(){
         try {
             backGroundMenu = ImageIO.read(getClass().getResourceAsStream("res/backGround/backGround.png"));
@@ -47,6 +86,9 @@ public class ResLoader {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za ładowanie czionki
+     */
     private void getFont(){
         try {
             InputStream is = getClass().getResourceAsStream("res/font/ChakraPetch-Regular.ttf");
@@ -60,6 +102,9 @@ public class ResLoader {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za ładowanie obrazów obiektów
+     */
     private void getGameObjectImage(){
         try {
             solderingIron = ImageIO.read(getClass().getResourceAsStream("res/gameObject/solderingIron/solderingIron.png"));

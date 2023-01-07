@@ -4,8 +4,19 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+/**
+ * Klasa odpowiadająca za tworzenie okna gry
+ * @author Kacper Różycki
+ */
 public class Window extends Canvas {
 
+    /**
+     * Konstruktor klasy Window
+     * @param width szerokość okna gry
+     * @param height wysokość okna gry
+     * @param title nazwa okna
+     * @param game przekazanie gry
+     */
     public Window(int width, int height, String title, Game game){
         JFrame frame = new JFrame(title);
 

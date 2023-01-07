@@ -5,14 +5,32 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * Klasa odpowiadająca za możliwość przesuwania obiektu sposobem drag
+ * @author Kacper Różycki
+ */
 public class Dragger implements MouseListener, MouseMotionListener {
 
+    /**
+     * Deklaracja pointów, pozycji myszki, obiektu i kotwicy myszki
+     */
     Point startLoc, objectPos, objectSize, mousePos, mouseAnchor;
+
+    /**
+     * Tymczasowe obiekty
+     */
     GameObject tempObject, checkObject;
+    /**
+     * Ostatnie pozycje i prędkość myszki
+     */
     int lastX = 0, lastY = 0, velX, velY;
 
-    private final Handler handler;
+    private Handler handler;
 
+    /**
+     * Konstruktor klasy
+     * @param handler przekazanie handlera
+     */
     public Dragger(Handler handler){
         this.handler = handler;
     }
@@ -22,6 +40,12 @@ public class Dragger implements MouseListener, MouseMotionListener {
 
     }
 
+    /**
+     * <p>Metoda sprawdzająca czy myszka jest nad obiektem który można przesunąć</p>
+     * <p>I przypisująca pozycje w stosunku do obiektu</p>
+     * <p>Pozwala to na przesuwanie obiektu w dowolnym miejscu jego trzymania</p>
+     * @param e the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         startLoc = new Point(e.getX(), e.getY());
@@ -43,6 +67,10 @@ public class Dragger implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * W celach wizualnych po "rzuceniu" obiektem będzie się on poruszał przez ułamek sekundy
+     * @param e the event to be processed
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if(tempObject != null){
@@ -65,6 +93,11 @@ public class Dragger implements MouseListener, MouseMotionListener {
 
     }
 
+    /**
+     * <p>Przenoszenie obiektu do aktualnej pozycji myszki</p>
+     * <p>Co cykl jest wyliczana aktualna prędkość obiektu na podstawie ostatniej pozycji myszki</p>
+     * @param e the event to be processed
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
 

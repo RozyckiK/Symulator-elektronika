@@ -2,15 +2,40 @@ package symele.s184953;
 
 import java.awt.*;
 
+/**
+ * Klasa odpowiedzialna za wyświetlanie menu
+ * @author Kacper Różycki
+ */
 public class Menu{
 
+    /**
+     * Deklaracaj instancji gry
+     */
     private Game game;
+    /**
+     * Deklaracja instancji handlera
+     */
     private Handler handler;
+    /**
+     * Deklaracja instancji loadera
+     */
     private ResLoader loader;
 
+    /**
+     * Deklaracja przycisku play
+     */
     private Button playButton;
+    /**
+     * Deklaracja przycisku exit
+     */
     private Button exitButton;
 
+    /**
+     * Konstruktor klasy Menu
+     * @param game przekazuje gre
+     * @param handler przekazuje handlera
+     * @param loader przekazuje loadera
+     */
     public Menu(Game game, Handler handler, ResLoader loader){
         this.game = game;
         this.handler = handler;
@@ -26,7 +51,9 @@ public class Menu{
     }
 
 
-
+    /**
+     * Metoda ta odświeża działanie przycisków w menu
+     */
     public void tick(){
         playButton.tick();
         exitButton.tick();
@@ -42,6 +69,10 @@ public class Menu{
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za renderowanie w menu
+     * @param g przekazuje grafike
+     */
     public void render(Graphics g){
 
         //font setup for MENU

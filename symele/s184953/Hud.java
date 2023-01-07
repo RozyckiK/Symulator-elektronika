@@ -2,14 +2,36 @@ package symele.s184953;
 
 import java.awt.*;
 
+/**
+ * Klasa odpowiedzialna za hud w górnej częsci ekranu podczas gry
+ * @author Kacper Różycki
+ */
 public class Hud{
+    /**
+     * Dekalracaja instancji handlera
+     */
     private Handler handler;
+    /**
+     * Deklaracja instancji gry
+     */
     private Game game;
+    /**
+     * Deklaracja instancji loadera
+     */
     private ResLoader loader;
+    /**
+     * Deklaracaja przycisków znajdujących się na hud
+     */
     private Button menuButton, addTemperature, subtractTemperature, levelChanger;
 
+    /**
+     * Deklaracja napisu na przycisku do zmiany poziomów
+     */
     private String levelChangerString;
 
+    /**
+     * Enum ze stanami spoiwa
+     */
     public enum SOLDERSTATE{
         start,
         better,
@@ -17,10 +39,22 @@ public class Hud{
         burned
     }
 
+    /**
+     * Lista stanów spoiwa dla różnych poziomów
+     */
     public SOLDERSTATE[] levelResult = {SOLDERSTATE.start, SOLDERSTATE.start, SOLDERSTATE.start, SOLDERSTATE.start, SOLDERSTATE.start};
 
+    /**
+     * Deklaracja początkowej temperatury i poziomu
+     */
     private int temperature = 320, level = 1;
 
+    /**
+     * Konstruktor hud
+     * @param handler przekazuje handler
+     * @param game przekazuje gre
+     * @param loader przekazuje loader
+     */
     public Hud(Handler handler, Game game, ResLoader loader){
         this.handler = handler;
         this.game = game;
@@ -43,11 +77,23 @@ public class Hud{
         game.addMouseListener(levelChanger);
     }
 
+    /**
+     * Getter temperatury
+     * @return zwraca aktualną temperature
+     */
     public int getTemperature(){
         return temperature;
     }
 
+    /**
+     * Metoda odświeżająca wszystkie przyciski w hud
+     */
     private void buttons(){
+        menuButton.tick();
+        addTemperature.tick();
+        subtractTemperature.tick();
+        levelChanger.tick();
+
         if(menuButton.buttonAction){
             menuButton.setBackActionButton();
             game.gameState = Game.STATE.Menu;
@@ -77,14 +123,11 @@ public class Hud{
         }
     }
 
+    /**
+     *Metoda odpowiedzialna za odświeżanie
+     */
     public void tick(){
-        menuButton.tick();
-        addTemperature.tick();
-        subtractTemperature.tick();
-        levelChanger.tick();
-
         buttons();
-
 
         temperature = Game.clamp(temperature,300,400);
 
@@ -97,6 +140,10 @@ public class Hud{
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za renderowanie hud
+     * @param g przekazanie grafiki
+     */
     public void render(Graphics g){
         Font currentFont = loader.chakraPetchBold;
         Font newFont = currentFont.deriveFont(currentFont.getSize() * 30F);
@@ -126,18 +173,36 @@ public class Hud{
         g.drawString(levelChangerString,Game.WIDTH-299,45);
     }
 
+    /**
+     * Getter Level
+     * @return zwraca aktualny poziom
+     */
     public int getLevel(){
         return level;
     }
 
+    /**
+     * Setter Level
+     * @param x ustawia dany poziom
+     */
     public void setLevel(int x){
         level = x;
     }
 
+    /**
+     * Setter levelResult, ustawia stan spoiwa dla danego poziomu
+     * @param x przekazuje aktualny poziom
+     * @param solderstate przekazuje stan spoiwa
+     */
     public void setLevelResult(int x, SOLDERSTATE solderstate){
         levelResult[x] = solderstate;
     }
 
+    /**
+     * Getter levelResult, zwraca stan spoiwa dla danego poziomu
+     * @param x przekazuje dany poziom
+     * @return zwraca stan spoiwa
+     */
     public SOLDERSTATE getLevelResult(int x){
         return levelResult[x];
     }

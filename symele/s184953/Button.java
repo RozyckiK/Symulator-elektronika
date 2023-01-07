@@ -6,12 +6,36 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+/**
+ * Klasa odpowiadająca za przyciski w grze
+ * @author Kacper Różycki
+ */
 public class Button implements MouseListener, MouseMotionListener {
 
+    /**
+     * Deklaracaja instancji gry
+     */
     private Game game;
+    /**
+     * Deklaracja instancji handlera
+     */
     private Handler handler;
+    /**
+     * Deklaracja instancji loadera zasobów
+     */
     private ResLoader loader;
 
+    protected int x, y, width, height;
+    /**
+     * Konstruktor przycisku w grze
+     * @param handler przesłanie handlera
+     * @param game przesłanie gry
+     * @param loader przesłanie loadera
+     * @param x pozycja "x" przycisku
+     * @param y pozycja "y" przycisku
+     * @param width szerokość przycisku
+     * @param height wysokość przycsiku
+     */
     public Button(Handler handler,Game game, ResLoader loader, int x, int y, int width, int height){
         this.handler = handler;
         this.game = game;
@@ -21,33 +45,48 @@ public class Button implements MouseListener, MouseMotionListener {
         this.width = width;
         this.height = height;
     }
+
+    /**
+     * Enum z różnymi statusami przycisku
+     */
     private enum BUTTONSTATUS{
         Normal,
         Hover,
         Click
     }
 
-    protected int x, y, width, height;
 
+    /**
+     *Sprawdzanie akcji przycisku
+     */
     public boolean buttonAction = false;
 
+    /**
+     *przywracanie spowrotem możliwości akcji przycisku
+     */
     public void setBackActionButton(){
         buttonAction = false;
     }
 
+    /**
+     * aktualna grafika przycisku
+     */
     BufferedImage buttonImage;
 
+    /**
+     * aktualny status przycisku
+     */
     BUTTONSTATUS buttonState = BUTTONSTATUS.Normal;
-
-    public BufferedImage getButtonImage() {
-        return buttonImage;
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
     }
 
+    /**
+     * Metoda sprawdzająca klikanie w obszarze przyciku
+     * @param e the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
@@ -58,6 +97,10 @@ public class Button implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Metoda wywołująca akcje w momencie puszczania przycisku myszki
+     * @param e the event to be processed
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         int mx = e.getX();
@@ -83,6 +126,10 @@ public class Button implements MouseListener, MouseMotionListener {
 
     }
 
+    /**
+     * Sprawdzanie czy myszka jest nad przyciskiem
+     * @param e the event to be processed
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
         int mx = e.getX();
@@ -96,6 +143,9 @@ public class Button implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Metoda  przypisująca odpowiednią grafikę przycisku w zależności od jego aktualnego statusu
+     */
     public void tick(){
         if(buttonState == BUTTONSTATUS.Normal){
             buttonImage = loader.menuButtonNormal;
@@ -111,6 +161,10 @@ public class Button implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Metoda renderująca grafikę przycisku
+     * @param g przekazanie grafiki
+     */
     public void render(Graphics g){
         g.drawImage(buttonImage, x, y, width, height, null);
     }

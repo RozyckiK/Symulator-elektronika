@@ -2,17 +2,45 @@ package symele.s184953;
 
 import java.awt.*;
 
-public class Game1FinalResult {
+/**
+ * Klasa odpowiedzialna za wyświetlanie finałowego ekranu
+ */
+public class GameFinalResult {
+    /**
+     * Deklaracja instancji gry
+     */
     private Game game;
+    /**
+     * Deklaracja instancji handlera
+     */
     private Handler handler;
+    /**
+     * Deklaracja instancji loadera
+     */
     private ResLoader loader;
+    /**
+     * Deklaracja instancji hudu
+     */
     private Hud hud;
 
+    /**
+     * Deklaracja stringa z wynikiem rundy
+     */
     private String resultString;
 
+    /**
+     * Deklaracja przycisku
+     */
     private Button menuButton;
 
-    public Game1FinalResult(Game game, Handler handler, ResLoader loader, Hud hud){
+    /**
+     * Konstruktor klasy
+     * @param game przekaznie gry
+     * @param handler przekazania handlera
+     * @param loader przkazanie loadera
+     * @param hud przekazanie hudu
+     */
+    public GameFinalResult(Game game, Handler handler, ResLoader loader, Hud hud){
         this.game = game;
         this.handler = handler;
         this.loader = loader;
@@ -23,6 +51,9 @@ public class Game1FinalResult {
         game.addMouseMotionListener(menuButton);
     }
 
+    /**
+     * Powrót do menu i ustawienie poziomu spowrotem do 1
+     */
     public void tick() {
         menuButton.tick();
 
@@ -33,6 +64,10 @@ public class Game1FinalResult {
         }
     }
 
+    /**
+     * Renderowanie przycisków i napisów na ekranie
+     * @param g przekazanie grafiki
+     */
     public void render(Graphics g){
         Font currentFont = loader.chakraPetchBold;
         Font newFont = currentFont.deriveFont(currentFont.getSize() * 60F);

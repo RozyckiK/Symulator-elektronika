@@ -3,10 +3,26 @@ package symele.s184953;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Klasa obiektu lutownicy
+ * @author Kacper Różycki
+ */
 public class SolderingIron extends GameObject{
 
+    /**
+     * Deklaracja obrazu lutownicy
+     */
     private BufferedImage solderingIronImage;
 
+    /**
+     * Konstruktor klasy lutownicy
+     * @param x początkowa pozycja "x" obiektu
+     * @param y początkowa pozycja "y" obiektu
+     * @param id id obiektu
+     * @param sizeX szerokość obiektu
+     * @param sizeY wysokość obiektu
+     * @param solderingIronImage przekazanie obrazu lutownicy
+     */
     public SolderingIron(int x, int y, ID id, int sizeX, int sizeY,BufferedImage solderingIronImage) {
         super(x, y, id, sizeX, sizeY);
         velX = 0;
@@ -14,11 +30,22 @@ public class SolderingIron extends GameObject{
         this.solderingIronImage = solderingIronImage;
     }
 
+    /**
+     * Metoda odpowiadjąca za przekaznie granic obiektu
+     * @return zwraca granice obiektu
+     */
     public Rectangle getBounds(){
         return new Rectangle(x+38, y+230 ,19, 25);
     }
 
+    /**
+     * Deklaracja inta odpowiedzialnego za liczenie ticków
+     */
     int tickCount = 0;
+
+    /**
+     * Metoda odpowiedzialna za odświeżenie obiektu
+     */
     public void tick() {
 
         x += velX;
@@ -55,6 +82,10 @@ public class SolderingIron extends GameObject{
         tickCount++;
     }
 
+    /**
+     * Metoda odpowiedzialna za renderowanie obiektu
+     * @param g przekazanie grafiki
+     */
     public void render(Graphics g) {
         g.drawImage(solderingIronImage, x, y, sizeX, sizeY, null);
     }
